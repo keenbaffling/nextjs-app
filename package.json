@@ -7,6 +7,7 @@
     "start": "next start",
     "nexus": "nexus dev",
     "migrate:init": "prisma migrate save --name init --experimental",
+    "migrate:save": "prisma migrate save --experimental",
     "migrate:up": "prisma migrate up --experimental",
     "migrate:down": "prisma migrate down --experimental",
     "codegen": "graphql-codegen --watch",
