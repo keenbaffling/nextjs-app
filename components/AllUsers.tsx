@@ -1,15 +1,5 @@
 import React from 'react';
-import gql from 'graphql-tag';
-import { useQuery } from 'urql';
-
-const AllUsersQuery = gql`
-  query {
-    allUsers {
-      id
-      name
-    }
-  }
-`;
+import { useAllUsersQuery } from '../generated/graphql';
 
 type AllUsersData = {
   allUsers: {
@@ -19,7 +9,7 @@ type AllUsersData = {
 };
 
 const AllUsers: React.FC = () => {
-  const [result] = useQuery<AllUsersData>({ query: AllUsersQuery });
+  const [result] = useAllUsersQuery();
   const { fetching, data, error } = result;
 
   if (fetching) {
@@ -32,9 +22,9 @@ const AllUsers: React.FC = () => {
 
   return (
     <div>
-      <p>There are {data?.allUsers.length} user(s) in the database:</p>
+      <p>There are {data?.allUsers?.length} user(s) in the database:</p>
       <ul>
-        {data?.allUsers.map((user) => (
+        {data?.allUsers?.map((user) => (
           <li key={user.id}>{user.name}</li>
         ))}
       </ul>
