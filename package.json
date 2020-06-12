@@ -2,9 +2,14 @@
   "name": "with-typescript",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next",
+    "dev": "concurrently \"nexus dev\" \"next\"",
     "build": "next build",
     "start": "next start",
+    "nexus": "nexus dev",
+    "migrate:init": "prisma migrate save --name init --experimental",
+    "migrate:up": "prisma migrate up --experimental",
+    "migrate:down": "prisma migrate down --experimental",
+    "codegen": "graphql-codegen --watch",
     "type-check": "tsc"
   },
   "dependencies": {
@@ -21,9 +26,14 @@
     "urql": "^1.9.8"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.15.3",
+    "@graphql-codegen/typescript": "^1.15.3",
+    "@graphql-codegen/typescript-operations": "^1.15.3",
+    "@graphql-codegen/typescript-urql": "^1.15.3",
     "@types/node": "^12.12.47",
     "@types/react": "^16.9.36",
     "@types/react-dom": "^16.9.8",
+    "concurrently": "^5.2.0",
     "typescript": "^3.7.3"
   },
   "license": "ISC"
