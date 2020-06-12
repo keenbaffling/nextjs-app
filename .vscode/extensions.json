@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "joelday.docthis",
+    "mikestead.dotenv",
+    "EditorConfig.EditorConfig",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "Prisma.prisma",
+    "jawandarajbir.react-vscode-extension-pack",
+    "wayou.vscode-todo-highlight",
+    "ms-vscode.vscode-typescript-tslint-plugin"
+  ]
+}
