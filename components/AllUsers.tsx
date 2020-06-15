@@ -1,15 +1,8 @@
 import React from 'react';
-import { useAllUsersQuery } from '../generated/graphql';
-
-type AllUsersData = {
-  allUsers: {
-    id: string;
-    name: string;
-  }[];
-};
+import { useUsersQuery } from '../generated/graphql';
 
 const AllUsers: React.FC = () => {
-  const [result] = useAllUsersQuery();
+  const [result] = useUsersQuery();
   const { fetching, data, error } = result;
 
   if (fetching) {
