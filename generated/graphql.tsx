@@ -70,6 +70,16 @@ export type LogFilter = {
   none?: Maybe<LogWhereInput>;
 };
 
+export type LogOrderByInput = {
+  id?: Maybe<OrderByArg>;
+  type?: Maybe<OrderByArg>;
+  name?: Maybe<OrderByArg>;
+  description?: Maybe<OrderByArg>;
+  createdAt?: Maybe<OrderByArg>;
+  updatedAt?: Maybe<OrderByArg>;
+  userId?: Maybe<OrderByArg>;
+};
+
 export type LogScalarWhereInput = {
   id?: Maybe<StringFilter>;
   type?: Maybe<StringFilter>;
@@ -254,8 +264,8 @@ export type QueryUserArgs = {
 
 
 export type QueryUsersArgs = {
-  where?: Maybe<QueryUsersWhereInput>;
-  orderBy?: Maybe<QueryUsersOrderByInput>;
+  where?: Maybe<UserWhereInput>;
+  orderBy?: Maybe<UserOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   after?: Maybe<UserWhereUniqueInput>;
   before?: Maybe<UserWhereUniqueInput>;
@@ -270,33 +280,13 @@ export type QueryLogArgs = {
 
 
 export type QueryLogsArgs = {
-  where?: Maybe<QueryLogsWhereInput>;
-  orderBy?: Maybe<QueryLogsOrderByInput>;
+  where?: Maybe<LogWhereInput>;
+  orderBy?: Maybe<LogOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   after?: Maybe<LogWhereUniqueInput>;
   before?: Maybe<LogWhereUniqueInput>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-};
-
-export type QueryLogsOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  createdAt?: Maybe<OrderByArg>;
-};
-
-export type QueryLogsWhereInput = {
-  id?: Maybe<StringFilter>;
-  createdAt?: Maybe<DateTimeFilter>;
-};
-
-export type QueryUsersOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  createdAt?: Maybe<OrderByArg>;
-};
-
-export type QueryUsersWhereInput = {
-  id?: Maybe<StringFilter>;
-  createdAt?: Maybe<DateTimeFilter>;
 };
 
 export enum Role {
@@ -364,6 +354,16 @@ export type UserCreateWithoutLogsInput = {
   role?: Maybe<Role>;
 };
 
+export type UserOrderByInput = {
+  id?: Maybe<OrderByArg>;
+  email?: Maybe<OrderByArg>;
+  password?: Maybe<OrderByArg>;
+  name?: Maybe<OrderByArg>;
+  createdAt?: Maybe<OrderByArg>;
+  updatedAt?: Maybe<OrderByArg>;
+  role?: Maybe<OrderByArg>;
+};
+
 export type UserUpdateInput = {
   id?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
@@ -425,27 +425,28 @@ export type UserWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
 };
 
-export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
+export type AllUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type UsersQuery = (
+export type AllUsersQuery = (
   { __typename?: 'Query' }
   & { users: Array<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'name'>
+    & Pick<User, 'id' | 'email' | 'name'>
   )> }
 );
 
 
-export const UsersDocument = gql`
-    query users {
+export const AllUsersDocument = gql`
+    query AllUsers {
   users {
     id
+    email
     name
   }
 }
     `;
 
-export function useUsersQuery(options: Omit<Urql.UseQueryArgs<UsersQueryVariables>, 'query'> = {}) {
-  return Urql.useQuery<UsersQuery>({ query: UsersDocument, ...options });
+export function useAllUsersQuery(options: Omit<Urql.UseQueryArgs<AllUsersQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<AllUsersQuery>({ query: AllUsersDocument, ...options });
 };

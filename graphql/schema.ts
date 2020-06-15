@@ -7,39 +7,58 @@ schema.objectType({
   name: 'User',
   definition(t) {
     t.model.id();
+    t.model.email();
     t.model.name();
+    t.model.createdAt();
+    t.model.updatedAt();
+    t.model.role();
+    t.model.logs();
   },
 });
 
 schema.queryType({
   definition(t) {
-    t.list.field('allUsers', {
-      type: 'User',
-      resolve(_parent, _args, ctx) {
-        return ctx.db.user.findMany();
-      },
-    });
-
     t.crud.user();
-    t.crud.users();
+    t.crud.users({
+      filtering: true,
+      ordering: true,
+      pagination: true,
+    });
+    t.crud.log();
+    t.crud.logs({
+      filtering: true,
+      ordering: true,
+      pagination: true,
+    });
   },
 });
 
 schema.mutationType({
   definition(t) {
-    t.field('bigRedButton', {
-      type: 'String',
-      async resolve(_parent, _args, ctx) {
-        const { count } = await ctx.db.user.deleteMany({});
-        return `${count} users(s) destroyed.`;
-      },
-    });
-
+    // User
     t.crud.createOneUser();
-    t.crud.deleteOneUser();
-    t.crud.deleteManyUser();
     t.crud.updateOneUser();
     t.crud.updateManyUser();
+    t.crud.deleteOneUser();
+    t.crud.deleteManyUser();
 
+    // Log
+    t.crud.createOneLog();
+    t.crud.updateOneLog();
+    t.crud.updateManyLog();
+    t.crud.deleteOneLog();
+    t.crud.deleteManyLog();
+  },
+});
+
+schema.objectType({
+  name: 'Log',
+  definition(t) {
+    t.model.id();
+    t.model.type();
+    t.model.name();
+    t.model.description();
+    t.model.createdAt();
+    t.model.updatedAt();
   },
 });
