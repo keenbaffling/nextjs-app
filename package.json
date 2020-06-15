@@ -1,16 +1,16 @@
 {
-  "name": "with-typescript",
+  "name": "nextjs-app",
   "version": "1.0.0",
   "scripts": {
-    "dev": "concurrently \"nexus dev\" \"next\"",
+    "dev": "next",
     "build": "next build",
     "start": "next start",
     "nexus": "nexus dev",
-    "migrate:init": "prisma migrate save --name init --experimental",
+    "nexus:reflection": "nexus dev --reflection --entrypoint pages/api/graphql.ts",
     "migrate:save": "prisma migrate save --experimental",
     "migrate:up": "prisma migrate up --experimental",
     "migrate:down": "prisma migrate down --experimental",
-    "codegen": "graphql-codegen --watch",
+    "codegen": "graphql-codegen",
     "type-check": "tsc"
   },
   "dependencies": {
