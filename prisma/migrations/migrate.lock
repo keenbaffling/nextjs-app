@@ -9,3 +9,4 @@
 20200613015117-add-log-timestamps
 20200615142422-rename-logs-table
 20200615144058-add-user-role-and-logs
+20200615151252-update-user-log-relation
