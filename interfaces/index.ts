@@ -6,3 +6,4 @@
 
 export * from './User';
 export * from './Log';
+export * from './Role';
