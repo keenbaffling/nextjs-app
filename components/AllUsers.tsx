@@ -1,8 +1,8 @@
 import React from 'react';
-import { useUsersQuery } from '../generated/graphql';
+import { useAllUsersQuery } from '../generated/graphql';
 
 const AllUsers: React.FC = () => {
-  const [result] = useUsersQuery();
+  const [result] = useAllUsersQuery();
   const { fetching, data, error } = result;
 
   if (fetching) {
@@ -15,9 +15,9 @@ const AllUsers: React.FC = () => {
 
   return (
     <div>
-      <p>There are {data?.allUsers?.length} user(s) in the database:</p>
+      <p>There are {data?.users?.length} user(s) in the database:</p>
       <ul>
-        {data?.allUsers?.map((user) => (
+        {data?.users?.map((user) => (
           <li key={user.id}>{user.name}</li>
         ))}
       </ul>
