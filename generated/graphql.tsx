@@ -423,6 +423,7 @@ export type UserWhereInput = {
 
 export type UserWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
 };
 
 export type AllUsersQueryVariables = Exact<{ [key: string]: never; }>;
