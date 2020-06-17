@@ -1,0 +1,10 @@
+query allLogs {
+  logs {
+    id
+    type
+    name
+    description
+    createdAt
+    updatedAt
+  }
+}

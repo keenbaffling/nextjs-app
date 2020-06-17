@@ -1,12 +1,19 @@
 import { schema, use } from 'nexus';
 import { prisma } from 'nexus-plugin-prisma';
-import './objectTypes';
+import './features/objectTypes';
 
 use(prisma());
 
+schema.addToContext((req) => {
+  console.log(req);
+  return {
+    req
+  }
+})
+
 schema.queryType({
   definition(t) {
-    // t.crud.user();
+    t.crud.user();
     t.crud.users({
       filtering: true,
       ordering: true,

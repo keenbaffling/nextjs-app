@@ -251,15 +251,9 @@ export enum OrderByArg {
 
 export type Query = {
   __typename?: 'Query';
-  user?: Maybe<User>;
   users: Array<User>;
   log?: Maybe<Log>;
   logs: Array<Log>;
-};
-
-
-export type QueryUserArgs = {
-  where: UserWhereUniqueInput;
 };
 
 
@@ -426,6 +420,17 @@ export type UserWhereUniqueInput = {
   email?: Maybe<Scalars['String']>;
 };
 
+export type AllLogsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllLogsQuery = (
+  { __typename?: 'Query' }
+  & { logs: Array<(
+    { __typename?: 'Log' }
+    & Pick<Log, 'id' | 'type' | 'name' | 'description' | 'createdAt' | 'updatedAt'>
+  )> }
+);
+
 export type AllUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -433,17 +438,36 @@ export type AllUsersQuery = (
   { __typename?: 'Query' }
   & { users: Array<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'email' | 'name'>
+    & Pick<User, 'id' | 'email' | 'name' | 'createdAt' | 'updatedAt' | 'role'>
   )> }
 );
 
 
+export const AllLogsDocument = gql`
+    query allLogs {
+  logs {
+    id
+    type
+    name
+    description
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+export function useAllLogsQuery(options: Omit<Urql.UseQueryArgs<AllLogsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<AllLogsQuery>({ query: AllLogsDocument, ...options });
+};
 export const AllUsersDocument = gql`
-    query AllUsers {
+    query allUsers {
   users {
     id
     email
     name
+    createdAt
+    updatedAt
+    role
   }
 }
     `;
